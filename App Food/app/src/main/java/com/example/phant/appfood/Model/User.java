@@ -1,6 +1,8 @@
 package com.example.phant.appfood.Model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String idUser,email;
 
     public User(String idUser, String email) {

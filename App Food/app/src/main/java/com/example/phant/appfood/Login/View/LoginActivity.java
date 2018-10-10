@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.phant.appfood.Login.Presenter.LoginPresenterImp;
 import com.example.phant.appfood.Model.User;
+import com.example.phant.appfood.Options.View.OptionsActivity;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.Register.View.RegisterActivity;
 import com.example.phant.appfood.databinding.ActivityLoginBinding;
@@ -20,7 +21,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private ActivityLoginBinding binding;
     private LoginPresenterImp presenterImp;
     private FirebaseAuth firebaseAuth;
-    private User user;
     private Intent intent;
 
 
@@ -77,7 +77,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void getUser(User user) {
-        this.user = user;
+        intent = new Intent(LoginActivity.this,OptionsActivity.class);
+        intent.putExtra("user",user);
+        startActivity(intent);
+        finish();
     }
 
     @Override

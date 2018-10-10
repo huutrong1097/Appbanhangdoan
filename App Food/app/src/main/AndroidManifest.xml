@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Options.View.OptionsActivity">
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
