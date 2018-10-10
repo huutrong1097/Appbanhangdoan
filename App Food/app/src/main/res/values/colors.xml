@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff6a00</color>
+    <color name="colorPrimaryDark">#f79046</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="vienEditText">#686666</color>
+    <color name="backgroundEditText">#63da97a6</color>
+    <color name="colorButton">#fe7b08</color>
+    <color name="colorText">#ff8400</color>
+</resources>

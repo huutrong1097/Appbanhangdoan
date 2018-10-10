@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "243213799658",
+    "firebase_url": "https://app-food-8f3fb.firebaseio.com",
+    "project_id": "app-food-8f3fb",
+    "storage_bucket": "app-food-8f3fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243213799658:android:de0f5f4dec0c8e41",
+        "android_client_info": {
+          "package_name": "com.example.phant.appfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243213799658-1bk8ghri0aqpqgc1ntlggf7q8uhpks8q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phant.appfood",
+            "certificate_hash": "32ec467d0c3b841f97ef7a0257e73a471d2345b0"
+          }
+        },
+        {
+          "client_id": "243213799658-vgem8d22u893c63glgeshn0bufv8gfrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5C_RI5HN8Cym6iB2iSQab7PuOqowElvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243213799658-vgem8d22u893c63glgeshn0bufv8gfrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
