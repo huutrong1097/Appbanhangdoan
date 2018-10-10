@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.phant.appfood.Register.Presenter.RegisterPresenter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -13,15 +14,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterModel {
     private FirebaseAuth xacThuc;
+    private RegisterPresenter presenter;
 
-   Context context;
+  private Context context;
 
-    public RegisterModel(FirebaseAuth xacThuc, Context context) {
-        this.xacThuc = xacThuc;
+    public RegisterModel( Context context,RegisterPresenter presenter) {
+        this.presenter = presenter;
         this.context = context;
+        this.xacThuc = FirebaseAuth.getInstance();
     }
 
-    public User taoTaiKhoan(String email, String pass){
+    public void taoTaiKhoan(String email, String pass){
         final User user1 = new User();
         xacThuc.createUserWithEmailAndPassword(email,pass).addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
             @Override
@@ -30,11 +33,12 @@ public class RegisterModel {
                     FirebaseUser user = xacThuc.getCurrentUser();
                     user1.setIdUser(user.getUid());
                     user1.setEmail(user.getEmail());
+                    presenter.taoTaiKhoanSuccess(user1);
                 }else {
-                    Log.e("loi", String.valueOf(task.getException()));
+                    presenter.taoTaiKhoanFailure(String.valueOf(task.getException()));
                 }
             }
         });
-        return user1;
+
     }
 }

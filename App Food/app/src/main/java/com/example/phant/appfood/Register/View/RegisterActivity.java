@@ -9,24 +9,24 @@ import android.widget.Toast;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.Register.Model.RegisterModel;
 import com.example.phant.appfood.Register.Model.User;
+import com.example.phant.appfood.Register.Presenter.RegisterPresenterImp;
 import com.example.phant.appfood.databinding.ActivityRegisterBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements RegisterView {
     private ActivityRegisterBinding binding;
-    private FirebaseAuth xacThuc;
     private DatabaseReference databaseUser;
-    private RegisterModel registerModel;
     private User user;
+    private RegisterPresenterImp presenterImp;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        xacThuc = FirebaseAuth.getInstance();
-        registerModel = new RegisterModel(xacThuc, this);
+     presenterImp = new RegisterPresenterImp(this,this);
+
 
         binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Xác nhận mật khẩu sai!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                user = registerModel.taoTaiKhoan(email, pass);
+
                 Toast.makeText(RegisterActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
 
             }
