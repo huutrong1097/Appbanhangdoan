@@ -1,9 +1,9 @@
 package com.example.phant.appfood.Register.Presenter;
 
-import com.example.phant.appfood.Register.Model.User;
+import com.example.phant.appfood.Model.User;
 
 public interface RegisterPresenter {
-    void taoTaiKhoanSuccess(User user);
+    void taoTaiKhoanSuccess(String email,String pass);
     void taoTaiKhoanFailure(String messages);
 
 }

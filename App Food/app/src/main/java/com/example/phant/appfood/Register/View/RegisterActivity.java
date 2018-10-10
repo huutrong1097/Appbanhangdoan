@@ -1,5 +1,6 @@
 package com.example.phant.appfood.Register.View;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,27 +8,32 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.phant.appfood.R;
-import com.example.phant.appfood.Register.Model.RegisterModel;
-import com.example.phant.appfood.Register.Model.User;
+import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.Register.Presenter.RegisterPresenterImp;
 import com.example.phant.appfood.databinding.ActivityRegisterBinding;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
     private ActivityRegisterBinding binding;
-    private DatabaseReference databaseUser;
-    private User user;
     private RegisterPresenterImp presenterImp;
+    private Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-     presenterImp = new RegisterPresenterImp(this,this);
+        this.confit();
+        this.listenEvent();
 
+    }
 
+    void confit() {
+        presenterImp = new RegisterPresenterImp(this, this);
+        intent = getIntent();
+    }
+
+    void listenEvent() {
         binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,10 +56,37 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                     Toast.makeText(RegisterActivity.this, "Xác nhận mật khẩu sai!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                Toast.makeText(RegisterActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
-
+                presenterImp.startRegister(email, pass);
             }
         });
     }
+
+    @Override
+    public void showProgressBar() {
+        binding.progressBarRegister.setVisibility(View.VISIBLE);
+        binding.linearLayout5.setVisibility(View.INVISIBLE);
+        binding.buttonRegister.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        binding.progressBarRegister.setVisibility(View.GONE);
+        binding.linearLayout5.setVisibility(View.VISIBLE);
+        binding.buttonRegister.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showMessages(String messages) {
+        Toast.makeText(RegisterActivity.this, messages, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getTaiKhoan(String email, String pass) {
+        intent.putExtra("email", email);
+        intent.putExtra("pass", pass);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+
 }

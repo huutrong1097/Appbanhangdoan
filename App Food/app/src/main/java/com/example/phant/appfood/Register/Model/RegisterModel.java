@@ -3,8 +3,8 @@ package com.example.phant.appfood.Register.Model;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
+import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.Register.Presenter.RegisterPresenter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,16 +24,14 @@ public class RegisterModel {
         this.xacThuc = FirebaseAuth.getInstance();
     }
 
-    public void taoTaiKhoan(String email, String pass){
-        final User user1 = new User();
+    public void taoTaiKhoan(String email, final String pass){
+
         xacThuc.createUserWithEmailAndPassword(email,pass).addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     FirebaseUser user = xacThuc.getCurrentUser();
-                    user1.setIdUser(user.getUid());
-                    user1.setEmail(user.getEmail());
-                    presenter.taoTaiKhoanSuccess(user1);
+                    presenter.taoTaiKhoanSuccess(user.getEmail(),pass);
                 }else {
                     presenter.taoTaiKhoanFailure(String.valueOf(task.getException()));
                 }

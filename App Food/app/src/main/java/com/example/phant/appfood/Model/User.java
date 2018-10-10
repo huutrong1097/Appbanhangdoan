@@ -1,4 +1,4 @@
-package com.example.phant.appfood.Register.Model;
+package com.example.phant.appfood.Model;
 
 public class User {
     String idUser,email;
