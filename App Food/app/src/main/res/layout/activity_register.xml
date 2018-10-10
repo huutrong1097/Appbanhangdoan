@@ -5,7 +5,7 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register.Controller.RegisterActivity">
+    tools:context=".Register.View.RegisterActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"

@@ -24,7 +24,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Register.Controller.RegisterActivity">
+        <activity android:name=".Register.View.RegisterActivity">
 
         </activity>
         <activity android:name=".OrderActivity" />
