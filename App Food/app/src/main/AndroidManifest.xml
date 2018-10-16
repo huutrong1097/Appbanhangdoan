@@ -3,6 +3,7 @@
     package="com.example.phant.appfood">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -19,19 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Options.View.OptionsActivity">
-
-        </activity>
+        <activity android:name=".Options.View.OptionsActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Register.View.RegisterActivity">
-
-        </activity>
+        <activity android:name=".Register.View.RegisterActivity" />
         <activity android:name=".OrderActivity" />
-
+        <activity android:name=".Client.Menu.View.MenuActivity" />
+        <activity android:name=".Admin.Menu.View.MenuAdminActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".Admin.Chat.ChatAdminActivity"></activity>
     </application>
 
 </manifest>

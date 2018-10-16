@@ -20,7 +20,7 @@ android {
     }
     sourceSets {
         main {
-            res.srcDirs = ['src/main/res', 'src/main/res/login', 'src/main/res/login/layout', 'src/main/res/login/drawable']
+            res.srcDirs = ['src/main/res', 'src/main/res/login', 'src/main/res/login/layout', 'src/main/res/login/drawable', 'src/main/res/admin', 'src/main/res/client', 'src/main/res/menu']
         }
     }
     dataBinding {
