@@ -28,7 +28,7 @@
 
         <activity android:name=".Register.View.RegisterActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".Client.Menu.View.MenuActivity" />
+        <activity android:name=".Client.Menu.View.MenuClientActivity" />
         <activity android:name=".Admin.Menu.View.MenuAdminActivity" android:theme="@style/AppTheme"/>
         <activity android:name=".Admin.Chat.ChatAdminActivity"></activity>
     </application>

@@ -3,6 +3,7 @@ package com.example.phant.appfood.Admin.Menu.Model;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.phant.appfood.Admin.Menu.Presenter.MenuAdminPresenter;
@@ -12,6 +13,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -53,14 +57,14 @@ public class MenuAdminModel {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("loi load anh",e.getMessage());
-                        presenter.addFoodFailure("Lỗi không thể load ảnh: "+e.getMessage());
+                        Log.e("loi load anh", e.getMessage());
+                        presenter.addFoodFailure("Lỗi không thể load ảnh: " + e.getMessage());
                     }
                 });
                 Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()){
+                        if (!task.isSuccessful()) {
                             throw task.getException();
                         }
                         return reference.getDownloadUrl();
@@ -68,19 +72,50 @@ public class MenuAdminModel {
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()){
-                            Uri downloadUri= task.getResult();
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
                             food1.setLinkImage(String.valueOf(downloadUri));
-                        }else {
+                        } else {
                             Log.e("error url image ", String.valueOf(task.getException()));
                         }
                         food = food1;
-                        databaseReference.child("food/"+typeFood).push().setValue(food);
+                        databaseReference.child("food/" + typeFood).push().setValue(food);
                         presenter.addFoodSuccess();
                     }
                 });
 
             }
         }).start();
+    }
+
+    public void getDataFood(String typeFood) {
+        databaseReference.child("food/" + typeFood).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Food food = dataSnapshot.getValue(Food.class);
+                food.setIdFood(dataSnapshot.getKey());
+                presenter.loadDataMenuSuccess(food);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

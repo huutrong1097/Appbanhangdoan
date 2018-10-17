@@ -25,6 +25,10 @@ public class MenuAdminPresenterImp implements MenuAdminPresenter {
         model.upLoadFood(food,typeFood);
     }
 
+    public void getDataFirebase(String typeFood){
+        model.getDataFood(typeFood);
+    }
+
 
     @Override
     public void addFoodSuccess() {
@@ -37,8 +41,8 @@ public class MenuAdminPresenterImp implements MenuAdminPresenter {
     }
 
     @Override
-    public void loadDataMenuSuccess() {
-
+    public void loadDataMenuSuccess(Food food) {
+        view.displayFragmentDetailFood(food);
     }
 
     @Override

@@ -2,15 +2,14 @@ package com.example.phant.appfood.Options.View;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.phant.appfood.Admin.Menu.View.MenuAdminActivity;
+import com.example.phant.appfood.Client.Menu.View.MenuClientActivity;
 import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.ActivityOptionsBinding;
@@ -38,8 +37,16 @@ public class OptionsActivity extends AppCompatActivity {
         binding.actionMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(OptionsActivity.this, MenuAdminActivity.class);
-                startActivity(intent);
+                if (user.getIdUser().equals("G1lLx7aCEJZD43ODEeuxo9U0AY82")){
+                    intent = new Intent(OptionsActivity.this, MenuAdminActivity.class);
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(OptionsActivity.this, MenuClientActivity.class);
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+                }
+
             }
         });
         binding.actionChat.setOnClickListener(new View.OnClickListener() {
