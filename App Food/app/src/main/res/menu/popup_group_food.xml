@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/monGoi"
+        android:title="Gỏi" />
+    <item
+        android:id="@+id/monCuon"
+        android:title="Cuốn" />
+    <item
+        android:id="@+id/monCom"
+        android:title="Cơm" />
+</menu>

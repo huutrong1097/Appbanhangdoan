@@ -37,7 +37,7 @@ public class MenuAdminModel {
         this.storageReference = firebaseStorage.getReference();
     }
 
-    public void upLoadFood(final Food food1) {
+    public void upLoadFood(final Food food1, final String typeFood) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -71,14 +71,15 @@ public class MenuAdminModel {
                         if (task.isSuccessful()){
                             Uri downloadUri= task.getResult();
                             food1.setLinkImage(String.valueOf(downloadUri));
-                            Log.e("nhan", String.valueOf(downloadUri));
                         }else {
-                            Log.e("nhan", String.valueOf(task.getException()));
+                            Log.e("error url image ", String.valueOf(task.getException()));
                         }
                         food = food1;
+                        databaseReference.child("food/"+typeFood).push().setValue(food);
+                        presenter.addFoodSuccess();
                     }
                 });
-                databaseReference.child("food").push().setValue(food);
+
             }
         }).start();
     }

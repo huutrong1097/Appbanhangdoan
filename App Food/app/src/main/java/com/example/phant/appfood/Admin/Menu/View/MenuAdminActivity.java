@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,11 +28,11 @@ public class MenuAdminActivity extends AppCompatActivity implements MenuAdminVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_menu_admin);
-        this.config();
+        this.configView();
         this.aksPermissions();
     }
 
-    void config() {
+    void configView() {
         this.fragmentManager = getSupportFragmentManager();
         this.presenterImp = new MenuAdminPresenterImp(this,this);
     }
@@ -45,6 +44,8 @@ public class MenuAdminActivity extends AppCompatActivity implements MenuAdminVie
             }
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,13 +59,12 @@ public class MenuAdminActivity extends AppCompatActivity implements MenuAdminVie
         switch (item.getItemId()) {
             case R.id.addFood:
                 AddFoodFragmentDialog dialogAddFood = new AddFoodFragmentDialog();
-                dialogAddFood.onCallback(new AddFoodFragmentDialog.Callback() {
-                    @Override
-                    public void resultFood(Food food) {
-                        Log.e("nhan", food.getName());
-                        presenterImp.postFood(food);
-                    }
-                });
+               dialogAddFood.onCallback(new AddFoodFragmentDialog.Callback() {
+                   @Override
+                   public void resultFood(Food food, String typeFood) {
+                       presenterImp.postFood(food,typeFood);
+                   }
+               });
                 dialogAddFood.show(fragmentManager, null);
                 break;
         }

@@ -17,23 +17,23 @@ public class MenuAdminPresenterImp implements MenuAdminPresenter {
         this.config();
     }
 
-    void config(){
-        this.model = new MenuAdminModel(context,this);
+    void config() {
+        this.model = new MenuAdminModel(context, this);
     }
 
-    public void postFood(Food food){
-        model.upLoadFood(food);
+    public void postFood(Food food,String typeFood) {
+        model.upLoadFood(food,typeFood);
     }
 
 
     @Override
     public void addFoodSuccess() {
-
+        view.showMessages("Món ăn thành công!");
     }
 
     @Override
     public void addFoodFailure(String messages) {
-
+        view.showMessages(messages);
     }
 
     @Override
