@@ -74,7 +74,7 @@
                 android:background="@drawable/background_button"
                 android:fontFamily="serif"
                 android:text="Chọn"
-                android:textColor="@color/ms_white" />
+                android:textColor="#fff" />
         </LinearLayout>
 
         <Button
@@ -85,7 +85,7 @@
             android:background="@drawable/background_button"
             android:fontFamily="serif"
             android:text="Add"
-            android:textColor="@color/ms_white" />
+            android:textColor="#fff" />
 
     </LinearLayout>
 </layout>

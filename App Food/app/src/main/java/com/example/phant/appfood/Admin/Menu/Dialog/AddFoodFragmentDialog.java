@@ -1,4 +1,4 @@
-package com.example.phant.appfood.Admin.Menu.View;
+package com.example.phant.appfood.Admin.Menu.Dialog;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
