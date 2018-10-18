@@ -18,12 +18,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MenuAdminModel {
     private Context context;
@@ -89,32 +92,22 @@ public class MenuAdminModel {
     }
 
     public void getDataFood(String typeFood) {
-        databaseReference.child("food/" + typeFood).addChildEventListener(new ChildEventListener() {
+        final List<Food> foodList = new ArrayList<>();
+        databaseReference.child("food/" + typeFood).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Food food = dataSnapshot.getValue(Food.class);
-                food.setIdFood(dataSnapshot.getKey());
-                presenter.loadDataMenuSuccess(food);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot f : dataSnapshot.getChildren()) {
+                    String link = f.child("linkImage").getValue(String.class);
+                    String name = f.child("name").getValue(String.class);
+                    String price = f.child("unitPrice").getValue(String.class);
+                    foodList.add(new Food(null, name, price, link));
+                }
+                presenter.getDataFoodSuccess(foodList);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                presenter.getDataFoodFailure(databaseError.getMessage());
             }
         });
     }

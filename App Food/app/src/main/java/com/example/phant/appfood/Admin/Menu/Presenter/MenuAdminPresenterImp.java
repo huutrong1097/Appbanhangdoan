@@ -1,10 +1,13 @@
 package com.example.phant.appfood.Admin.Menu.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.phant.appfood.Admin.Menu.Model.MenuAdminModel;
 import com.example.phant.appfood.Admin.Menu.View.MenuAdminView;
 import com.example.phant.appfood.Model.Food;
+
+import java.util.List;
 
 public class MenuAdminPresenterImp implements MenuAdminPresenter {
     private Context context;
@@ -21,11 +24,12 @@ public class MenuAdminPresenterImp implements MenuAdminPresenter {
         this.model = new MenuAdminModel(context, this);
     }
 
-    public void postFood(Food food,String typeFood) {
-        model.upLoadFood(food,typeFood);
+    public void postFood(Food food, String typeFood) {
+        model.upLoadFood(food, typeFood);
     }
 
-    public void getDataFirebase(String typeFood){
+    public void getDataFirebase(String typeFood) {
+        view.showProgressBar();
         model.getDataFood(typeFood);
     }
 
@@ -41,12 +45,15 @@ public class MenuAdminPresenterImp implements MenuAdminPresenter {
     }
 
     @Override
-    public void loadDataMenuSuccess(Food food) {
-        view.displayFragmentDetailFood(food);
+    public void getDataFoodSuccess(List<Food> foods) {
+        view.hideProgressBar();
+        view.displayFragmentDetailFood(foods);
     }
 
     @Override
-    public void loaddataMenuFailure(String messages) {
-
+    public void getDataFoodFailure(String message) {
+        view.hideProgressBar();
+        view.showMessages(message);
     }
+
 }

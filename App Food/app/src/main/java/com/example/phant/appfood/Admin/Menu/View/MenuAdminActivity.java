@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,11 +35,13 @@ public class MenuAdminActivity extends AppCompatActivity implements MenuAdminVie
     private List<String> listTypeFood;
     private MenuAdminFoodAdapter foodAdapter;
     private MenuAdminDetailFoodFragment detailFoodFragment;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_menu_admin);
+        this.bundle = savedInstanceState;
         this.configView();
         this.listenResult();
         this.aksPermissions();
@@ -62,14 +65,16 @@ public class MenuAdminActivity extends AppCompatActivity implements MenuAdminVie
             @Override
             public void reuslt(String type) {
                 presenterImp.getDataFirebase(type);
-                detailFoodFragment = new MenuAdminDetailFoodFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.containerFragment, detailFoodFragment, "detailFood");
-                fragmentTransaction.addToBackStack(null);
-                binding.containerFragment.setVisibility(View.VISIBLE);
-                //binding.layout.recyclerView.setVisibility(View.GONE);
-                //binding.layout.progressBar.setVisibility(View.GONE);
-                fragmentTransaction.commit();
+                binding.containerFragmentAdmin.setVisibility(View.VISIBLE);
+                if (bundle == null) {
+                    detailFoodFragment = new MenuAdminDetailFoodFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.containerFragmentAdmin, detailFoodFragment, "detailFood");
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                } else {
+                    detailFoodFragment = (MenuAdminDetailFoodFragment) fragmentManager.findFragmentByTag("detailFood");
+                }
             }
         });
     }
@@ -114,19 +119,20 @@ public class MenuAdminActivity extends AppCompatActivity implements MenuAdminVie
 
     @Override
     public void hideProgressBar() {
-        binding.layout.recyclerView.setVisibility(View.GONE);
+        binding.layout.recyclerView.setVisibility(View.VISIBLE);
         binding.layout.progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showMessages(String messages) {
-Toast.makeText(MenuAdminActivity.this,messages,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MenuAdminActivity.this, messages, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void displayFragmentDetailFood(Food food) {
-        detailFoodFragment.receiverFood(food);
+    public void displayFragmentDetailFood(List<Food> foodList) {
+        detailFoodFragment.receiverFood(foodList);
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
