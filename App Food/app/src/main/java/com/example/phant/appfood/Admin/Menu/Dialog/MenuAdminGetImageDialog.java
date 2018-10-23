@@ -61,7 +61,6 @@ public class MenuAdminGetImageDialog extends DialogFragment {
         while (cursor.moveToNext()) {
             int address = cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
             listImage.add(cursor.getString(address));
-            //  Log.e("image",cursor.getString(address));
         }
         cursor.close();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
