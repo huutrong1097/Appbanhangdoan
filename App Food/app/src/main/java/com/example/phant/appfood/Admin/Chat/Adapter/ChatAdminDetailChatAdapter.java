@@ -1,4 +1,4 @@
-package com.example.phant.appfood.Client.Chat.Adapter;
+package com.example.phant.appfood.Admin.Chat.Adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -16,21 +16,15 @@ import com.example.phant.appfood.databinding.AdapterChatSendBinding;
 
 import java.util.List;
 
-public class ChatClientAdapter extends RecyclerView.Adapter {
+public class ChatAdminDetailChatAdapter extends RecyclerView.Adapter {
     private List<Chat> chatList;
-    private static final int SEND = 0;
-    private static final int RECEIVER = 1;
+    private static final int send = 0;
+    private static final int receiver = 1;
     private User user;
 
-    public ChatClientAdapter(List<Chat> chatList, User user) {
+    public ChatAdminDetailChatAdapter(List<Chat> chatList, User user) {
         this.chatList = chatList;
         this.user = user;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (chatList.get(position).getDetailChat().getIdUser().equals(user.getIdUser())) return SEND;
-        return RECEIVER;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -39,16 +33,23 @@ public class ChatClientAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (chatList.get(position).getDetailChat().getIdUser().equals(user.getIdUser()))
+            return receiver;
+        return send;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        if (viewType == RECEIVER) {
-            AdapterChatReceiverBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_chat_receiver, parent, false);
+        if (viewType == send) {
+            AdapterChatSendBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_chat_send, parent, false);
             return new MyViewHolder(binding.getRoot());
         } else {
-            AdapterChatSendBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_chat_send, parent, false);
+            AdapterChatReceiverBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_chat_receiver, parent, false);
             return new MyViewHolder(binding.getRoot());
         }
     }
@@ -56,10 +57,10 @@ public class ChatClientAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Chat chat = chatList.get(position);
-        if (holder.getItemViewType() == SEND) {
+        if (holder.getItemViewType()==send){
             AdapterChatSendBinding binding = DataBindingUtil.findBinding(holder.itemView);
             binding.textSend.setText(chat.getDetailChat().getBodyMessages());
-        } else {
+        }else {
             AdapterChatReceiverBinding binding = DataBindingUtil.findBinding(holder.itemView);
             binding.textBodyReceiver.setText(chat.getDetailChat().getBodyMessages());
         }

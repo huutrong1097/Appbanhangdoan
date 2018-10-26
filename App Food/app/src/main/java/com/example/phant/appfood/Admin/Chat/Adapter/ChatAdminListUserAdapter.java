@@ -8,16 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.phant.appfood.Model.Chat;
+import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.AdapterListUserChatAdminBinding;
 
 import java.util.List;
 
 public class ChatAdminListUserAdapter extends RecyclerView.Adapter {
-    private List<String> listUser;
+    public interface CallbackListUserAdapter{
+        void resultUser(User user);
+    }
+
+    private CallbackListUserAdapter callbackListUserAdapter;
+    public void onCallback(CallbackListUserAdapter callbackListUserAdapter){
+        this.callbackListUserAdapter=callbackListUserAdapter;
+    }
+    private List<Chat> listUser;
     private AdapterListUserChatAdminBinding binding;
 
-    public ChatAdminListUserAdapter(List<String> listUser) {
+    public ChatAdminListUserAdapter(List<Chat> listUser) {
         this.listUser = listUser;
     }
 
@@ -38,8 +48,15 @@ public class ChatAdminListUserAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        String user = listUser.get(position);
-        binding.textUser.setText(user);
+        final Chat user = listUser.get(position);
+        binding.textUser.setText(user.getUser().getEmail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callbackListUserAdapter==null)return;
+                callbackListUserAdapter.resultUser(new User(user.getUser().getIdUser(),user.getUser().getEmail()));
+            }
+        });
     }
 
     @Override

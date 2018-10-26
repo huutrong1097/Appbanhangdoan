@@ -11,10 +11,12 @@ public class ChatClientPresenterImp implements ChatClientPresenter {
     private Context context;
     private ChatClientView view;
     private ChatClientModel model;
+    private User user;
 
-    public ChatClientPresenterImp(Context context, ChatClientView view) {
+    public ChatClientPresenterImp(Context context, ChatClientView view, User user) {
         this.context = context;
         this.view = view;
+        this.user  =user;
         this.config();
     }
 
@@ -22,9 +24,9 @@ public class ChatClientPresenterImp implements ChatClientPresenter {
         this.model = new ChatClientModel(context, this);
     }
 
-    public void getData(User user) {
+    public void getData() {
         view.showLoading();
-        model.getDataMessages(user);
+        model.getDataMessages();
     }
 
     public void sendMessages(Chat chat) {
@@ -33,8 +35,10 @@ public class ChatClientPresenterImp implements ChatClientPresenter {
 
     @Override
     public void getMessagesSuccess(Chat chat) {
+    if (user.getIdUser().equals(chat.getUser().getIdUser())){
         view.hideLoading();
         view.displayChat(chat);
+    }else return;
     }
 
     @Override

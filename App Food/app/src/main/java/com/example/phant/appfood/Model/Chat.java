@@ -1,40 +1,30 @@
 package com.example.phant.appfood.Model;
 
 public class Chat {
-    String idUser;
-   String bodyMessages;
-   String imageMessages;
+    User user;
+   DetailChat detailChat;
 
-    public Chat(String idUser, String bodyMessages, String imageMessages) {
-        this.idUser = idUser;
-        this.bodyMessages = bodyMessages;
-        this.imageMessages = imageMessages;
+    public Chat(User user, DetailChat detailChat) {
+        this.user = user;
+        this.detailChat = detailChat;
     }
 
     public Chat() {
     }
 
-    public String getIdUser() {
-        return idUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getBodyMessages() {
-        return bodyMessages;
+    public DetailChat getDetailChat() {
+        return detailChat;
     }
 
-    public void setBodyMessages(String bodyMessages) {
-        this.bodyMessages = bodyMessages;
-    }
-
-    public String getImageMessages() {
-        return imageMessages;
-    }
-
-    public void setImageMessages(String imageMessages) {
-        this.imageMessages = imageMessages;
+    public void setDetailChat(DetailChat detailChat) {
+        this.detailChat = detailChat;
     }
 }

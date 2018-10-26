@@ -37,11 +37,11 @@ public class ChatClientModel {
     }
 
     public void sendMessages(Chat chat) {
-        databaseReference.child("Messages/" + chat.getIdUser()).push().setValue(chat);
+        databaseReference.child("Messages").push().setValue(chat);
     }
 
-    public void getDataMessages(User user) {
-        databaseReference.child("Messages/" + user.getIdUser()).addChildEventListener(new ChildEventListener() {
+    public void getDataMessages() {
+        databaseReference.child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Chat chat = dataSnapshot.getValue(Chat.class);

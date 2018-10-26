@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.phant.appfood.Client.Chat.Adapter.ChatClientAdapter;
 import com.example.phant.appfood.Client.Chat.Presenter.ChatClientPresenterImp;
 import com.example.phant.appfood.Model.Chat;
+import com.example.phant.appfood.Model.DetailChat;
 import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.ActivityChatClientBinding;
@@ -37,14 +38,14 @@ public class ChatClientActivity extends AppCompatActivity implements ChatClientV
     void configView() {
         intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
-        presenterImp = new ChatClientPresenterImp(this, this);
+        presenterImp = new ChatClientPresenterImp(this, this,user);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
        linearLayoutManager.setStackFromEnd(true);
         binding.recyclerViewChatClient.setLayoutManager(linearLayoutManager);
         chatList = new ArrayList<>();
         adapter = new ChatClientAdapter(chatList, user);
         binding.recyclerViewChatClient.setAdapter(adapter);
-        presenterImp.getData(user);
+        presenterImp.getData();
     }
 
     void listenClick() {
@@ -52,7 +53,7 @@ public class ChatClientActivity extends AppCompatActivity implements ChatClientV
             @Override
             public void onClick(View v) {
                 String text = binding.editBodyMessages.getText().toString();
-                Chat chat = new Chat(user.getIdUser(), text, null);
+                Chat chat = new Chat(user,new DetailChat(user.getIdUser(),text,null));
                 presenterImp.sendMessages(chat);
                 binding.editBodyMessages.setText("");
             }

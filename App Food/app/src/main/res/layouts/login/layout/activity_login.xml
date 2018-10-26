@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:text="phannhan1@gmail.com"
+            android:text="phannhan@gmail.com"
             android:textColor="#939393" />
 
         <TextView
