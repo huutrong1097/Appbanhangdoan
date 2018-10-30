@@ -1,5 +1,6 @@
 package com.example.phant.appfood.Client.Menu.View;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -16,10 +17,13 @@ import android.widget.Toast;
 import com.example.phant.appfood.Client.Menu.Adapter.MenuClientFoodAdapter;
 import com.example.phant.appfood.Client.Menu.Fragment.MenuClientDetailFoodFragment;
 import com.example.phant.appfood.Client.Menu.Presenter.MenuClientPresenterImp;
+import com.example.phant.appfood.Client.Order.View.OrderClientCartActivity;
 import com.example.phant.appfood.Model.Food;
+import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.ActivityMenuBinding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +36,9 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
     private FragmentManager fragmentManager;
     private Bundle bundle;
     private List<Food> listFoodOrder;
+    private Intent intent;
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
     }
 
     void configView() {
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
         this.presenterImp = new MenuClientPresenterImp(this, this);
         this.fragmentManager = getSupportFragmentManager();
         listFoodOrder = new ArrayList<>();
@@ -57,7 +66,6 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
     }
 
     void listenResult() {
-
         adapter.onCallback(new MenuClientFoodAdapter.Callback() {
             @Override
             public void resultType(String typeFood) {
@@ -98,7 +106,11 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.idGioHang:
-
+                Log.e("tesst",listFoodOrder.get(0).getName());
+                intent = new Intent(MenuClientActivity.this,OrderClientCartActivity.class);
+                intent.putExtra("user",user);
+                intent.putExtra("data", (Serializable) listFoodOrder);
+                startActivity(intent);
                 break;
         }
         return true;

@@ -1,6 +1,8 @@
 package com.example.phant.appfood.Model;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable {
     String idFood;
     String name;
     String unitPrice;
@@ -15,6 +17,7 @@ public class Food {
         this.unitPrice = unitPrice;
         this.linkImage = linkImage;
     }
+
 
     public String getIdFood() {
         return idFood;
@@ -47,4 +50,6 @@ public class Food {
     public void setLinkImage(String linkImage) {
         this.linkImage = linkImage;
     }
+
+
 }

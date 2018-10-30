@@ -11,7 +11,7 @@
         android:label="App Food"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionbar">
+        android:theme="@style/AppTheme">
         <activity android:name=".Login.View.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Options.View.OptionsActivity" />
+        <activity
+            android:name=".Options.View.OptionsActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".Register.View.RegisterActivity" />
-        <activity android:name=".OrderActivity" />
         <activity
             android:name=".Client.Menu.View.MenuClientActivity"
             android:theme="@style/AppTheme" />
@@ -35,7 +36,10 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Client.Order.View.OrderClientActivity" />
         <activity android:name=".Client.Chat.View.ChatClientActivity" />
-        <activity android:name=".Admin.Chat.View.ChatAdminActivity"></activity>
+        <activity android:name=".Admin.Chat.View.ChatAdminActivity" />
+        <activity android:name=".Client.Order.View.OrderClientCartActivity">
+
+        </activity>
     </application>
 
 </manifest>

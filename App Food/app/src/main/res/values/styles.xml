@@ -6,11 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="ms_stepperStyle">@style/DotStepperStyle</item>
     </style>
     <style name="AppTheme.NoActionbar" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+    <style name="DotStepperStyle">
+        <item name="ms_stepperType">dots</item>
+        <item name="ms_activeStepColor">#FFFFFF</item>
+        <item name="ms_inactiveStepColor">#006867</item>
+        <item name="ms_bottomNavigationBackground">?attr/colorAccent</item>
     </style>
 
 </resources>
