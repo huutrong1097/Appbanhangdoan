@@ -8,11 +8,12 @@ public class Order {
     String address;
     String phone;
     String note;
-    String totalMoney;
+    int totalMoney;
     int status;
     List<Food> foodList;
+    String date;
 
-    public Order(String idCustomer, String name, String address, String phone, String note, String totalMoney, int status, List<Food> foodList) {
+    public Order(String idCustomer, String name, String address, String phone, String note, int totalMoney, int status, List<Food> foodList, String date) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.address = address;
@@ -21,6 +22,15 @@ public class Order {
         this.totalMoney = totalMoney;
         this.status = status;
         this.foodList = foodList;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Order() {
@@ -66,11 +76,11 @@ public class Order {
         this.note = note;
     }
 
-    public String getTotalMoney() {
+    public int getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(String totalMoney) {
+    public void setTotalMoney(int totalMoney) {
         this.totalMoney = totalMoney;
     }
 

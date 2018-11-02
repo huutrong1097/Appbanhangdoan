@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.phant.appfood.Client.Order.Adapter.OrderClientStepAdapter1;
 import com.example.phant.appfood.Model.Food;
+import com.example.phant.appfood.Model.Order;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.FragmentStepOrder1Binding;
 
@@ -20,11 +21,21 @@ import java.util.List;
 
 @SuppressLint("ValidFragment")
 public class OrderClientStepFagment1 extends Fragment {
+    public interface CallbackStepFagment1 {
+        void result(Order order);
+    }
+
+    private CallbackStepFagment1 callbackStepFagment1;
+
+    public void onCallback(CallbackStepFagment1 callbackStepFagment1) {
+        this.callbackStepFagment1 = callbackStepFagment1;
+    }
+
     private FragmentStepOrder1Binding binding;
     private OrderClientStepAdapter1 adapter1;
     private List<Food> foodList;
-    private int subTotal=0;
-    private int grandTotal =0;
+    private int subTotal = 0;
+    private int grandTotal = 0;
     private int moneyShip = 3000;
 
     public OrderClientStepFagment1(List<Food> foodList) {
@@ -36,6 +47,7 @@ public class OrderClientStepFagment1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_step_order1, container, false);
         this.configView();
+        this.listenClick();
         return binding.getRoot();
     }
 
@@ -44,14 +56,27 @@ public class OrderClientStepFagment1 extends Fragment {
         binding.recyclerViewStep1.setLayoutManager(linearLayoutManager);
         adapter1 = new OrderClientStepAdapter1(foodList);
         binding.recyclerViewStep1.setAdapter(adapter1);
-        for (Food food : foodList){
+        for (Food food : foodList) {
             int i = Integer.parseInt(food.getUnitPrice().toString());
-            subTotal = subTotal+i;
+            subTotal = subTotal + i;
         }
-        binding.textViewSubTotal.setText(subTotal+" VNĐ");
-        binding.textViewShipping.setText(moneyShip+" VNĐ");
-        grandTotal =subTotal+moneyShip;
-        binding.textViewGrandTotal.setText(grandTotal+" VNĐ");
+        binding.textViewSubTotal.setText(subTotal + " VNĐ");
+        binding.textViewShipping.setText(moneyShip + " VNĐ");
+        grandTotal = subTotal + moneyShip;
+        binding.textViewGrandTotal.setText(grandTotal + " VNĐ");
+    }
+
+    void listenClick() {
+        binding.buttonNext1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callbackStepFagment1 == null) return;
+                Order order = new Order();
+                order.setTotalMoney(grandTotal);
+                order.setFoodList(foodList);
+                callbackStepFagment1.result(order);
+            }
+        });
     }
 
 }

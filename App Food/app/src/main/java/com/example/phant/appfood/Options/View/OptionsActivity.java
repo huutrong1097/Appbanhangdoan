@@ -12,6 +12,7 @@ import com.example.phant.appfood.Admin.Chat.View.ChatAdminActivity;
 import com.example.phant.appfood.Admin.Menu.View.MenuAdminActivity;
 import com.example.phant.appfood.Client.Chat.View.ChatClientActivity;
 import com.example.phant.appfood.Client.Menu.View.MenuClientActivity;
+import com.example.phant.appfood.Client.Order.View.OrderClientActivity;
 import com.example.phant.appfood.Model.User;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.ActivityOptionsBinding;
@@ -64,6 +65,20 @@ public class OptionsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
+            }
+        });
+        binding.actionOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (user.getIdUser().equals("G1lLx7aCEJZD43ODEeuxo9U0AY82")) {
+                    intent = new Intent(OptionsActivity.this, ChatAdminActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(OptionsActivity.this, OrderClientActivity.class);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                }
             }
         });
     }

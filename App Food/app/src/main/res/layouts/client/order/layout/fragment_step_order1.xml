@@ -19,11 +19,11 @@
         <LinearLayout
             android:id="@+id/linearLayout7"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="107dp"
             android:background="@color/ms_white"
             android:orientation="vertical"
             android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/buttonNext1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -110,6 +110,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonNext1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#fe7b08"
+            android:fontFamily="serif"
+            android:text="Next"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

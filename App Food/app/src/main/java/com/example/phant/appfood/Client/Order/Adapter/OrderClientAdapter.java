@@ -8,20 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.phant.appfood.Model.Food;
 import com.example.phant.appfood.R;
-import com.example.phant.appfood.databinding.AdapterCartBinding;
+import com.example.phant.appfood.databinding.AdapterOrderBinding;
 
 import java.util.List;
 
-public class OrderClientCartAdapter extends RecyclerView.Adapter {
-    private List<Food> foodList;
-    private AdapterCartBinding binding;
+public class OrderClientAdapter extends RecyclerView.Adapter {
+    private AdapterOrderBinding binding;
+    List<String> list;
 
-    public OrderClientCartAdapter(List<Food> foodList) {
-        this.foodList = foodList;
+    public OrderClientAdapter(List<String> list) {
+        this.list = list;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -35,20 +32,19 @@ public class OrderClientCartAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_cart, parent, false);
+        binding = DataBindingUtil.inflate(layoutInflater,R.layout.adapter_order,parent,false);
         return new MyViewHolder(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Food food = foodList.get(position);
-        Glide.with(holder.itemView).load(food.getLinkImage()).apply(RequestOptions.centerCropTransform()).into(binding.imageViewListGioHang);
-        binding.textViewNameFood.setText(food.getName());
-        binding.textViewUnitPrice.setText(food.getUnitPrice() + "VNĐ");
+        String name = list.get(position);
+        binding.textTitle.setText(name);
+
     }
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        return list.size();
     }
 }
