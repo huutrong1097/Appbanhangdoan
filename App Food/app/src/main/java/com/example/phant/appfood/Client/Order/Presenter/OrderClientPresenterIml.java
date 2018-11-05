@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.phant.appfood.Client.Order.Model.OrderClientModel;
 import com.example.phant.appfood.Client.Order.View.OrderClientView;
+import com.example.phant.appfood.Model.Order;
 
 import java.util.List;
 
@@ -23,8 +24,9 @@ public class OrderClientPresenterIml implements OrderClientPresenter {
     }
 
 
+
     @Override
-    public void getListOrderSuccess(List<String> stringList) {
+    public void getListOrderSuccess(List<Order> stringList) {
         view.display(stringList);
     }
 }

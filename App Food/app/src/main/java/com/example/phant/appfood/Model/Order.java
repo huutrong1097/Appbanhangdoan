@@ -3,12 +3,13 @@ package com.example.phant.appfood.Model;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @IgnoreExtraProperties
-public class Order {
+public class Order implements Serializable {
     String idCustomer;
     String name;
     String address;

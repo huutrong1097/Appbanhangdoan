@@ -1,4 +1,4 @@
-package com.example.phant.appfood.Client.Order.Fragment;
+package com.example.phant.appfood.Admin.Order.Fragment;
 
 import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
@@ -11,34 +11,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.phant.appfood.Client.Order.Adapter.OrderClientStepAdapter5;
+import com.example.phant.appfood.Admin.Order.Adapter.OrderAdminCompleteAdapter;
 import com.example.phant.appfood.Model.Order;
 import com.example.phant.appfood.R;
-import com.example.phant.appfood.databinding.FragmentStepOrder5Binding;
+import com.example.phant.appfood.databinding.FragmentOrderAdminCompleteBinding;
 
 @SuppressLint("ValidFragment")
-public class OrderClientStepFagment5 extends Fragment {
-    private FragmentStepOrder5Binding binding;
+public class OrderAdminDetailCompleteFragment extends Fragment {
+    private FragmentOrderAdminCompleteBinding binding;
     private Order order;
-    private OrderClientStepAdapter5 adapter5;
+    private OrderAdminCompleteAdapter adapter;
 
-    public OrderClientStepFagment5(Order order) {
+    public OrderAdminDetailCompleteFragment(Order order) {
         this.order = order;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_step_order5, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_admin_complete, container, false);
         this.configView();
         return binding.getRoot();
     }
 
     void configView() {
-        binding.textViewGrandTotal.setText(String.valueOf(order.getTotalMoney())+" VNĐ");
+        binding.textName.setText(order.getName());
+        binding.textPhone.setText(order.getPhone());
+        binding.textAddress.setText(order.getAddress());
+        binding.textNote.setText(order.getNote());
+        binding.textMoney.setText(String.valueOf(order.getTotalMoney()) + " VNĐ");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getBaseContext(), LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(linearLayoutManager);
-        adapter5 = new OrderClientStepAdapter5(order.getFoodList());
-        binding.recyclerView.setAdapter(adapter5);
+        adapter = new OrderAdminCompleteAdapter(order.getFoodList());
+        binding.recyclerView.setAdapter(adapter);
+
     }
 }

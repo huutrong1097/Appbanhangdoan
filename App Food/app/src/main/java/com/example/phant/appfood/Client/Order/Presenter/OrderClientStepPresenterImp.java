@@ -6,7 +6,7 @@ import com.example.phant.appfood.Client.Order.Model.OrderClientStepModel;
 import com.example.phant.appfood.Client.Order.View.OrderClientStepView;
 import com.example.phant.appfood.Model.Order;
 
-public class OrderClientStepPresenterImp implements OrderClientStepPresenter{
+public class OrderClientStepPresenterImp implements OrderClientStepPresenter {
     private Context context;
     private OrderClientStepView view;
     private OrderClientStepModel model;
@@ -14,10 +14,25 @@ public class OrderClientStepPresenterImp implements OrderClientStepPresenter{
     public OrderClientStepPresenterImp(Context context, OrderClientStepView view) {
         this.context = context;
         this.view = view;
-        model = new OrderClientStepModel(context,this);
+        model = new OrderClientStepModel(context, this);
     }
 
-    public void sendOrder(Order order){
+    public void sendOrder(Order order) {
         model.sendOrder(order);
+    }
+
+    public void getStatus(Order order) {
+        model.getOrder(order);
+    }
+
+
+    @Override
+    public void resultDetailOrder(Order order) {
+        view.resultDataDetailOrder(order);
+    }
+
+    @Override
+    public void resultChangeDetailOrder(Order order) {
+        view.resultChangeDetailOrder(order);
     }
 }

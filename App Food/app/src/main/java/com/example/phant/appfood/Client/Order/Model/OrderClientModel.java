@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.example.phant.appfood.Client.Order.Presenter.OrderClientPresenter;
+import com.example.phant.appfood.Model.Order;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,15 +36,15 @@ public class OrderClientModel {
     }
 
     public void getListOrder(final String customer) {
-        final List<String> list = new ArrayList<>();
+        final List<Order> list = new ArrayList<>();
         databaseReference.child("Order").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    String date = d.child("date").getValue(String.class);
+                    Order order = d.getValue(Order.class);
                     String customer1 = d.child("idCustomer").getValue(String.class);
                     if (customer1.equals(customer))
-                        list.add(0,date);
+                        list.add(0,order);
                 }
                 presenter.getListOrderSuccess(list);
             }

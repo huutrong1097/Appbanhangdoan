@@ -51,7 +51,6 @@ public class ChatClientModel {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Chat chat = dataSnapshot.getValue(Chat.class);
                 chat.setKey(dataSnapshot.getKey());
-                Log.e("key", chat.getKey());
                 presenter.chaneMess(chat);
             }
 

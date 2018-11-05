@@ -15,13 +15,16 @@ import com.example.phant.appfood.databinding.AdapterOrderAdminBinding;
 import java.util.List;
 
 public class OrderAdminAdapter extends RecyclerView.Adapter {
-    public interface  CallbackOrderAdminAdapter{
+    public interface CallbackOrderAdminAdapter {
         void result(Order order);
     }
+
     private CallbackOrderAdminAdapter callbackOrderAdminAdapter;
-    public void onCallback(CallbackOrderAdminAdapter callbackOrderAdminAdapter){
-        this.callbackOrderAdminAdapter=callbackOrderAdminAdapter;
+
+    public void onCallback(CallbackOrderAdminAdapter callbackOrderAdminAdapter) {
+        this.callbackOrderAdminAdapter = callbackOrderAdminAdapter;
     }
+
     private List<Order> orderList;
     private AdapterOrderAdminBinding binding;
 
@@ -40,7 +43,7 @@ public class OrderAdminAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        binding = DataBindingUtil.inflate(layoutInflater,R.layout.adapter_order_admin,parent,false);
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_order_admin, parent, false);
         return new MyViewHolder(binding.getRoot());
     }
 
@@ -52,7 +55,7 @@ public class OrderAdminAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callbackOrderAdminAdapter==null)return;
+                if (callbackOrderAdminAdapter == null) return;
                 callbackOrderAdminAdapter.result(order);
             }
         });

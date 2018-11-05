@@ -20,6 +20,4 @@ public class OrderClientStepFagment3 extends Fragment  {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_step_order3,container,false);
         return binding.getRoot();
     }
-
-
 }

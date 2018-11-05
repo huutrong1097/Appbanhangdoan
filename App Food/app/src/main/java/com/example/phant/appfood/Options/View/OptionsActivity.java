@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.phant.appfood.Admin.Chat.View.ChatAdminActivity;
 import com.example.phant.appfood.Admin.Menu.View.MenuAdminActivity;
@@ -34,7 +33,6 @@ public class OptionsActivity extends AppCompatActivity {
     void confit() {
         this.intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
-        Toast.makeText(OptionsActivity.this, user.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
     void listenEvent() {

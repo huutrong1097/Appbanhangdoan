@@ -32,7 +32,6 @@ public class LoginPresenterImp implements LoginPresenter {
 
     @Override
     public void loginSuccess(User user) {
-        view.hideProgressBar();
         view.showMessages("Đăng nhập thành công");
         view.getUser(user);
     }

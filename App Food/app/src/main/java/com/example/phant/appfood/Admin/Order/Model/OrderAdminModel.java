@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class OrderAdminModel {
     private Context context;
-   private OrderAdminPresenter presenter;
+    private OrderAdminPresenter presenter;
     private DatabaseReference databaseReference;
 
     public OrderAdminModel(Context context, OrderAdminPresenter presenter) {
@@ -26,7 +26,7 @@ public class OrderAdminModel {
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void getListOrder(){
+    public void getListOrder() {
         databaseReference.child("Order").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -56,12 +56,12 @@ public class OrderAdminModel {
             }
         });
     }
-    public void upDateOrder(Order order){
-        Map<String,Object> objectMap = order.toMap();
-        Map<String, Object> update = new HashMap<>();
-        update.put("Order/"+order.getKey(),objectMap);
-        databaseReference.updateChildren(update);
 
+    public void upDateOrder(Order order) {
+        Map<String, Object> objectMap = order.toMap();
+        Map<String, Object> update = new HashMap<>();
+        update.put("Order/" + order.getKey(), objectMap);
+        databaseReference.updateChildren(update);
     }
 
 }

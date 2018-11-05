@@ -19,7 +19,8 @@ import com.example.phant.appfood.databinding.FragmentOrderAdminDetailBinding;
 @SuppressLint("ValidFragment")
 public class OrderAdminDetailFragment extends Fragment {
     public interface CallbackDetailFragment{
-        void result(Order order);
+        void chapNhan(Order order);
+        void huy(Order order);
     }
     private CallbackDetailFragment callbackDetailFragment;
     public void onCallback(CallbackDetailFragment callbackDetailFragment){
@@ -51,13 +52,21 @@ public class OrderAdminDetailFragment extends Fragment {
         binding.textPhone.setText(order.getPhone());
         binding.textAddress.setText(order.getAddress());
         binding.textNote.setText(order.getNote());
-        binding.textMoney.setText(String.valueOf(order.getTotalMoney()));
+        binding.textMoney.setText(String.valueOf(order.getTotalMoney())+" VNĐ");
         binding.buttonChapNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (callbackDetailFragment==null)return;
                 order.setStatus(1);
-                callbackDetailFragment.result(order);
+                callbackDetailFragment.chapNhan(order);
+            }
+        });
+        binding.buttonHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callbackDetailFragment==null)return;
+                order.setStatus(-1);
+                callbackDetailFragment.huy(order);
             }
         });
     }

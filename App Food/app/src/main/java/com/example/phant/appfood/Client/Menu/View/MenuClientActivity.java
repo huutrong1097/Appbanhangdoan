@@ -111,6 +111,7 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
                 intent = new Intent(MenuClientActivity.this, OrderClientCartActivity.class);
                 intent.putExtra("user", user);
                 intent.putExtra("data", (Serializable) listFoodOrder);
+                intent.putExtra("type",0);
                 startActivity(intent);
                 break;
         }
