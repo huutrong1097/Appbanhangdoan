@@ -46,4 +46,9 @@ public class ChatClientPresenterImp implements ChatClientPresenter {
         view.hideLoading();
         view.showMessages(messages);
     }
+
+    @Override
+    public void chaneMess(Chat chat) {
+        view.chaneMessa(chat);
+    }
 }

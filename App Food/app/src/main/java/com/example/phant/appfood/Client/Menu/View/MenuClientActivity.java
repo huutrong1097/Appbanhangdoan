@@ -106,9 +106,10 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.idGioHang:
-                Log.e("tesst",listFoodOrder.get(0).getName());
-                intent = new Intent(MenuClientActivity.this,OrderClientCartActivity.class);
-                intent.putExtra("user",user);
+                if (listFoodOrder == null) break;
+                Log.e("tesst", listFoodOrder.get(0).getName());
+                intent = new Intent(MenuClientActivity.this, OrderClientCartActivity.class);
+                intent.putExtra("user", user);
                 intent.putExtra("data", (Serializable) listFoodOrder);
                 startActivity(intent);
                 break;

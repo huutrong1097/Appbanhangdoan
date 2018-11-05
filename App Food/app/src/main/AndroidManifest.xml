@@ -37,10 +37,9 @@
         <activity android:name=".Client.Order.View.OrderClientActivity" />
         <activity android:name=".Client.Chat.View.ChatClientActivity" />
         <activity android:name=".Admin.Chat.View.ChatAdminActivity" />
-        <activity android:name=".Client.Order.View.OrderClientCartActivity"></activity>
-        <activity android:name=".Client.Order.View.OrderClientStepActivity">
-
-        </activity>
+        <activity android:name=".Client.Order.View.OrderClientCartActivity" />
+        <activity android:name=".Client.Order.View.OrderClientStepActivity"></activity>
+        <activity android:name=".Admin.Order.View.OrderAdminActivity"></activity>
     </application>
 
 </manifest>

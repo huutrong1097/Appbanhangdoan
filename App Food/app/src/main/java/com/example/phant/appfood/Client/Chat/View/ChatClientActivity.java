@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class ChatClientActivity extends AppCompatActivity implements ChatClientV
     private User user;
     private List<Chat> chatList;
     private ChatClientAdapter adapter;
+    List<String> keyChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ChatClientActivity extends AppCompatActivity implements ChatClientV
     }
 
     void configView() {
+        keyChat= new ArrayList<>();
         intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
         presenterImp = new ChatClientPresenterImp(this, this,user);
@@ -67,6 +70,7 @@ public class ChatClientActivity extends AppCompatActivity implements ChatClientV
 
     @Override
     public void displayChat(Chat chat) {
+        keyChat.add(chat.getKey());
         chatList.add(chat);
         adapter.notifyDataSetChanged();
     }
@@ -81,5 +85,12 @@ public class ChatClientActivity extends AppCompatActivity implements ChatClientV
     public void hideLoading() {
         binding.progressBarChatClient.setVisibility(View.INVISIBLE);
         binding.recyclerViewChatClient.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void chaneMessa(Chat chat) {
+        Log.e("chane", String.valueOf(keyChat.indexOf(chat.getKey())));
+        chatList.get(keyChat.indexOf(chat.getKey())).setDetailChat(chat.getDetailChat());
+        adapter.notifyItemChanged(keyChat.indexOf(chat.getKey()));
     }
 }

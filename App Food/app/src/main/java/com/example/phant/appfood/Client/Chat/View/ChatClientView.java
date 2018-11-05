@@ -7,4 +7,5 @@ public interface ChatClientView {
     void displayChat(Chat chat);
     void showLoading();
     void hideLoading();
+    void chaneMessa(Chat chat);
 }

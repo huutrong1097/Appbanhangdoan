@@ -3,10 +3,10 @@ package com.example.phant.appfood.Client.Chat.Model;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.example.phant.appfood.Client.Chat.Presenter.ChatClientPresenter;
 import com.example.phant.appfood.Model.Chat;
-import com.example.phant.appfood.Model.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,8 +14,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.CharArrayReader;
 
 public class ChatClientModel {
     private Context context;
@@ -45,12 +43,16 @@ public class ChatClientModel {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Chat chat = dataSnapshot.getValue(Chat.class);
+                chat.setKey(dataSnapshot.getKey());
                 presenter.getMessagesSuccess(chat);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                Chat chat = dataSnapshot.getValue(Chat.class);
+                chat.setKey(dataSnapshot.getKey());
+                Log.e("key", chat.getKey());
+                presenter.chaneMess(chat);
             }
 
             @Override

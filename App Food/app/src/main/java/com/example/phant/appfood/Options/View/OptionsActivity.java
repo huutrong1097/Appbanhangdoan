@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.phant.appfood.Admin.Chat.View.ChatAdminActivity;
 import com.example.phant.appfood.Admin.Menu.View.MenuAdminActivity;
+import com.example.phant.appfood.Admin.Order.View.OrderAdminActivity;
 import com.example.phant.appfood.Client.Chat.View.ChatClientActivity;
 import com.example.phant.appfood.Client.Menu.View.MenuClientActivity;
 import com.example.phant.appfood.Client.Order.View.OrderClientActivity;
@@ -71,7 +72,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (user.getIdUser().equals("G1lLx7aCEJZD43ODEeuxo9U0AY82")) {
-                    intent = new Intent(OptionsActivity.this, ChatAdminActivity.class);
+                    intent = new Intent(OptionsActivity.this, OrderAdminActivity.class);
                     intent.putExtra("user", user);
                     startActivity(intent);
                 } else {

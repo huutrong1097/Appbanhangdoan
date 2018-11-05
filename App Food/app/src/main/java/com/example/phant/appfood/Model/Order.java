@@ -1,7 +1,13 @@
 package com.example.phant.appfood.Model;
 
-import java.util.List;
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@IgnoreExtraProperties
 public class Order {
     String idCustomer;
     String name;
@@ -12,6 +18,9 @@ public class Order {
     int status;
     List<Food> foodList;
     String date;
+    String key;
+
+
 
     public Order(String idCustomer, String name, String address, String phone, String note, int totalMoney, int status, List<Food> foodList, String date) {
         this.idCustomer = idCustomer;
@@ -98,5 +107,27 @@ public class Order {
 
     public void setFoodList(List<Food> foodList) {
         this.foodList = foodList;
+    }
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    @Exclude
+    public Map<String,Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("idCustomer",idCustomer);
+        result.put("name",name);
+        result.put("address",address);
+        result.put("phone",phone);
+        result.put("note",note);
+        result.put("totalMoney",totalMoney);
+        result.put("status",status);
+        result.put("foodList",foodList);
+        result.put("date",date);
+        return result;
     }
 }

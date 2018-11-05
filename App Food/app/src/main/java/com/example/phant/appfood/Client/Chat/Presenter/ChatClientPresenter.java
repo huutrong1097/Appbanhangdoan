@@ -5,4 +5,5 @@ import com.example.phant.appfood.Model.Chat;
 public interface ChatClientPresenter {
     void getMessagesSuccess(Chat chat);
     void getMessagesFailure(String messages);
+    void chaneMess(Chat chat);
 }
