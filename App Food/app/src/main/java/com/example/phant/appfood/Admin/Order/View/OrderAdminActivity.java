@@ -24,7 +24,6 @@ public class OrderAdminActivity extends AppCompatActivity implements OrderAdminV
     private List<Order> orders;
     private OrderAdminPresenterImp presenterImp;
     private OrderAdminAdapter adapter;
-    private List<String> keyOrder;
     private OrderAdminDetailFragment fragment;
     private FragmentManager fragmentManager;
     private OrderAdminDetailAcceptFragment fragment2;
@@ -47,7 +46,6 @@ public class OrderAdminActivity extends AppCompatActivity implements OrderAdminV
         adapter = new OrderAdminAdapter(orders);
         binding.recyclerViewOrderAdmin.setAdapter(adapter);
         presenterImp.getListOrder();
-        keyOrder = new ArrayList<>();
         adapter.onCallback(new OrderAdminAdapter.CallbackOrderAdminAdapter() {
             @Override
             public void result(final Order order) {
@@ -110,7 +108,7 @@ public class OrderAdminActivity extends AppCompatActivity implements OrderAdminV
                     fragmentTransaction.replace(R.id.containerOrderAdminFragment, fragment3, "fragment3");
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                }else if (order.getStatus()==-1){
+                } else if (order.getStatus() == -1) {
                     fragment2 = new OrderAdminDetailAcceptFragment(1, null);
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerOrderAdminFragment, fragment2, "fragment2");
@@ -123,7 +121,6 @@ public class OrderAdminActivity extends AppCompatActivity implements OrderAdminV
 
     @Override
     public void display(Order order) {
-        keyOrder.add(0, order.getKey());
         orders.add(0, order);
         adapter.notifyDataSetChanged();
     }

@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login.View.LoginActivity" android:theme="@style/AppTheme.NoActionbar">
+        <activity
+            android:name=".Login.View.LoginActivity"
+            android:theme="@style/AppTheme.NoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +29,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Register.View.RegisterActivity" android:theme="@style/AppTheme.NoActionbar" />
+        <activity
+            android:name=".Register.View.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
         <activity
             android:name=".Client.Menu.View.MenuClientActivity"
             android:theme="@style/AppTheme" />
@@ -38,8 +42,13 @@
         <activity android:name=".Client.Chat.View.ChatClientActivity" />
         <activity android:name=".Admin.Chat.View.ChatAdminActivity" />
         <activity android:name=".Client.Order.View.OrderClientCartActivity" />
-        <activity android:name=".Client.Order.View.OrderClientStepActivity"></activity>
-        <activity android:name=".Admin.Order.View.OrderAdminActivity"></activity>
+        <activity android:name=".Client.Order.View.OrderClientStepActivity" />
+        <activity android:name=".Admin.Order.View.OrderAdminActivity" />
+
+        <service
+            android:name=".Admin.Order.Service.OrderAdminService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
