@@ -63,7 +63,10 @@ public class MenuClientDetailFoodAdapter extends RecyclerView.Adapter {
         }
         binding.checkBoxAdd.setChecked(flat);
         binding.textTitle.setText(food.getName());
-        binding.unitPrice.setText("Giá: " + food.getUnitPrice() + "VNĐ");
+        ArrayList<String> moneyNew = formatMoney(food.getUnitPrice());
+        for (String value : moneyNew){
+            binding.unitPrice.append(value);
+        }
         Glide.with(holder.itemView).load(food.getLinkImage()).apply(RequestOptions.centerCropTransform()).into(binding.imageFood);
         binding.checkBoxAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +88,21 @@ public class MenuClientDetailFoodAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return listFood.size();
+    }
+    public ArrayList<String> formatMoney (String chuoi){
+        ArrayList<String> arrayList = new ArrayList<>();
+        int flat = 0;
+        for (int i = chuoi.length();i>0;i--){
+            if (flat==3){
+                arrayList.add(0,".");
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat=1;
+            }else {
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat++;
+            }
+        }
+        return arrayList;
     }
 
 }

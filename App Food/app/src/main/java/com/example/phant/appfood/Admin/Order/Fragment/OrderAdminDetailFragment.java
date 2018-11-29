@@ -16,6 +16,8 @@ import com.example.phant.appfood.Model.Order;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.FragmentOrderAdminDetailBinding;
 
+import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class OrderAdminDetailFragment extends Fragment {
     public interface CallbackDetailFragment{
@@ -52,7 +54,10 @@ public class OrderAdminDetailFragment extends Fragment {
         binding.textPhone.setText(order.getPhone());
         binding.textAddress.setText(order.getAddress());
         binding.textNote.setText(order.getNote());
-        binding.textMoney.setText(String.valueOf(order.getTotalMoney())+" VNĐ");
+        ArrayList<String> totalMoneyNew = formatMoney(String.valueOf(order.getTotalMoney()));
+        for (String value: totalMoneyNew ) {
+            binding.textMoney.append(value);
+        }
         binding.buttonChapNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,5 +74,20 @@ public class OrderAdminDetailFragment extends Fragment {
                 callbackDetailFragment.huy(order);
             }
         });
+    }
+    public ArrayList<String> formatMoney (String chuoi){
+        ArrayList<String> arrayList = new ArrayList<>();
+        int flat = 0;
+        for (int i = chuoi.length();i>0;i--){
+            if (flat==3){
+                arrayList.add(0,".");
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat=1;
+            }else {
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat++;
+            }
+        }
+        return arrayList;
     }
 }

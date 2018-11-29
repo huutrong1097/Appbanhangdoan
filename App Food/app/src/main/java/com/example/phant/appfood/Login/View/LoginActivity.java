@@ -72,6 +72,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void showMessages(String messages) {
+        binding.progressBar.setVisibility(View.GONE);
+        binding.linearLayoutEdit.setVisibility(View.VISIBLE);
         Toast.makeText(LoginActivity.this, messages, Toast.LENGTH_SHORT).show();
     }
 

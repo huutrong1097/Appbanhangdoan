@@ -16,6 +16,8 @@ import com.example.phant.appfood.Model.Order;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.FragmentStepOrder5Binding;
 
+import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class OrderClientStepFagment5 extends Fragment {
     private FragmentStepOrder5Binding binding;
@@ -35,10 +37,28 @@ public class OrderClientStepFagment5 extends Fragment {
     }
 
     void configView() {
-        binding.textViewGrandTotal.setText(String.valueOf(order.getTotalMoney())+" VNĐ");
+        ArrayList<String> textGrandTotal = formatMoney(String.valueOf(order.getTotalMoney()));
+        for (String value:textGrandTotal){
+            binding.textViewGrandTotal.append(value);
+        }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getBaseContext(), LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(linearLayoutManager);
         adapter5 = new OrderClientStepAdapter5(order.getFoodList());
         binding.recyclerView.setAdapter(adapter5);
+    }
+    public ArrayList<String> formatMoney (String chuoi){
+        ArrayList<String> arrayList = new ArrayList<>();
+        int flat = 0;
+        for (int i = chuoi.length();i>0;i--){
+            if (flat==3){
+                arrayList.add(0,".");
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat=1;
+            }else {
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat++;
+            }
+        }
+        return arrayList;
     }
 }

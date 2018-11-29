@@ -14,6 +14,7 @@ import com.example.phant.appfood.Model.Food;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.AdapterAdminDetailFoodFragmentBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAdminDetailFoodFragmentAdapter extends RecyclerView.Adapter {
@@ -45,11 +46,30 @@ public class MenuAdminDetailFoodFragmentAdapter extends RecyclerView.Adapter {
         Food food = foodList.get(position);
         Glide.with(holder.itemView).load(food.getLinkImage()).apply(RequestOptions.centerCropTransform()).into(binding.imageView);
         binding.textViewName.setText("Tên: "+food.getName());
-        binding.textViewGia.setText("Giá: "+food.getUnitPrice()+"VNĐ");
+        ArrayList<String> unitPriceNew = formatMoney(food.getUnitPrice());
+        for (String value: unitPriceNew ) {
+            binding.textViewGia.append(value);
+        }
     }
 
     @Override
     public int getItemCount() {
         return foodList.size();
+    }
+
+    public ArrayList<String> formatMoney (String chuoi){
+        ArrayList<String> arrayList = new ArrayList<>();
+        int flat = 0;
+        for (int i = chuoi.length();i>0;i--){
+            if (flat==3){
+                arrayList.add(0,".");
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat=1;
+            }else {
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat++;
+            }
+        }
+        return arrayList;
     }
 }

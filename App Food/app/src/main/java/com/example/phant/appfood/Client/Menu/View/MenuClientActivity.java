@@ -106,13 +106,15 @@ public class MenuClientActivity extends AppCompatActivity implements MenuClientV
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.idGioHang:
-                if (listFoodOrder == null) break;
-                Log.e("tesst", listFoodOrder.get(0).getName());
-                intent = new Intent(MenuClientActivity.this, OrderClientCartActivity.class);
-                intent.putExtra("user", user);
-                intent.putExtra("data", (Serializable) listFoodOrder);
-                intent.putExtra("type",0);
-                startActivity(intent);
+                if (listFoodOrder.size() > 0) {
+                    intent = new Intent(MenuClientActivity.this, OrderClientCartActivity.class);
+                    intent.putExtra("user", user);
+                    intent.putExtra("data", (Serializable) listFoodOrder);
+                    intent.putExtra("type", 0);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MenuClientActivity.this, "Giỏ hàng của bạn trống!", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
         return true;

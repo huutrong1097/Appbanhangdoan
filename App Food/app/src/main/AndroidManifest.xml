@@ -48,7 +48,9 @@
         <service
             android:name=".Admin.Order.Service.OrderAdminService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".Options.View.InfomationActivity"></activity>
     </application>
 
 </manifest>

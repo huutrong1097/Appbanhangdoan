@@ -17,6 +17,7 @@ import com.example.phant.appfood.Model.Order;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.FragmentStepOrder1Binding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
@@ -57,13 +58,22 @@ public class OrderClientStepFagment1 extends Fragment {
         adapter1 = new OrderClientStepAdapter1(foodList);
         binding.recyclerViewStep1.setAdapter(adapter1);
         for (Food food : foodList) {
-            int i = Integer.parseInt(food.getUnitPrice().toString());
+            int i = Integer.parseInt(food.getUnitPrice());
             subTotal = subTotal + i;
         }
-        binding.textViewSubTotal.setText(subTotal + " VNĐ");
-        binding.textViewShipping.setText(moneyShip + " VNĐ");
+        ArrayList<String>  textSubTotal = formatMoney(String.valueOf(subTotal));
+        for (String value: textSubTotal){
+            binding.textViewSubTotal.append(value);
+        }
+        ArrayList<String>  textShipping = formatMoney(String.valueOf(moneyShip));
+        for (String value: textShipping){
+            binding.textViewShipping.append(value);
+        }
         grandTotal = subTotal + moneyShip;
-        binding.textViewGrandTotal.setText(grandTotal + " VNĐ");
+        ArrayList<String>  textGrandTotal = formatMoney(String.valueOf(grandTotal));
+        for (String value: textGrandTotal){
+            binding.textViewGrandTotal.append(value);
+        }
     }
 
     void listenClick() {
@@ -77,6 +87,21 @@ public class OrderClientStepFagment1 extends Fragment {
                 callbackStepFagment1.result(order);
             }
         });
+    }
+    public ArrayList<String> formatMoney (String chuoi){
+        ArrayList<String> arrayList = new ArrayList<>();
+        int flat = 0;
+        for (int i = chuoi.length();i>0;i--){
+            if (flat==3){
+                arrayList.add(0,".");
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat=1;
+            }else {
+                arrayList.add(0, String.valueOf(chuoi.charAt(i-1)));
+                flat++;
+            }
+        }
+        return arrayList;
     }
 
 }

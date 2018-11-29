@@ -59,6 +59,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 presenterImp.startRegister(email, pass);
             }
         });
+        binding.textLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -77,6 +83,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void showMessages(String messages) {
+        binding.progressBarRegister.setVisibility(View.GONE);
+        binding.linearLayout5.setVisibility(View.VISIBLE);
         Toast.makeText(RegisterActivity.this, messages, Toast.LENGTH_SHORT).show();
     }
 

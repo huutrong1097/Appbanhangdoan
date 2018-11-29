@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.phant.appfood.Model.Order;
 import com.example.phant.appfood.R;
 import com.example.phant.appfood.databinding.AdapterOrderAdminBinding;
@@ -52,6 +53,20 @@ public class OrderAdminAdapter extends RecyclerView.Adapter {
         final Order order = orderList.get(position);
         binding.textViewEmail.setText(order.getName());
         binding.textViewDate.setText(order.getDate());
+        switch (order.getStatus()){
+            case 0:
+                Glide.with(holder.itemView).load(R.drawable.ic_warning).into(binding.imageViewStatus);
+                break;
+            case -1:
+                Glide.with(holder.itemView).load(R.drawable.ic_error).into(binding.imageViewStatus);
+                break;
+            case 1:
+                Glide.with(holder.itemView).load(R.drawable.ic_ship).into(binding.imageViewStatus);
+                break;
+            case 2:
+                Glide.with(holder.itemView).load(R.drawable.ic_finish).into(binding.imageViewStatus);
+                break;
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

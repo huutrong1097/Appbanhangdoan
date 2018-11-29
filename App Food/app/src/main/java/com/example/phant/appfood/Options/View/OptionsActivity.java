@@ -80,5 +80,13 @@ public class OptionsActivity extends AppCompatActivity {
                 }
             }
         });
+        binding.info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(OptionsActivity.this, InfomationActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

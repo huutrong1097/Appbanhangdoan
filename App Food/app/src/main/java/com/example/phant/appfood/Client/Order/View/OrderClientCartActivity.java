@@ -36,7 +36,6 @@ public class OrderClientCartActivity extends AppCompatActivity {
         intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
         foodList = (List<Food>) intent.getSerializableExtra("data");
-        Log.e("tesst", foodList.get(0).getName());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerViewListGioHang.setLayoutManager(linearLayoutManager);
         adapter = new OrderClientCartAdapter(foodList);
