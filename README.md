@@ -1,18 +1,10 @@
-# Appbanhangdoan
-![](https://drive.google.com/file/d/1moLDeCQB-mIYqlOkeE6G3V4JBarD3FOl/view?usp=sharing)
-
 **Steps to add CodePush:**
-
-**#install lib**:
-
-1. npm install --save react-native-code-push
-2. yarn pod or npm pod
 
 **#Create project code push for app**:
 
 Step:
 
-1. Access link: https://appcenter.ms/
+1. Sign up account in CodePush: `https://appcenter.ms`
 2. Create project for Android/iOS
 3. Config Android:
   - Add the SDK to the project:
@@ -31,7 +23,7 @@ Step:
 
 4. Config iOS:
   - Add the SDK to the project:
-      In a terminal window opened at the root of a React Native project, enter the following line to add Crash and Analytics services to your app: run script `npm install appcenter appcenter-analytics appcenter-crashes --save-exact`
+      In a terminal window opened at the root of a React Native project, enter the following line to add Crash and Analytics services to your app: run script `npm install appcenter appcenter-analytics appcenter-crashes --save-exact`, later run script `npm pod` or `yarn pod`
   - Integrate the SDK:
       Run pod install from iOS directory to install CocoaPods dependencies.
       Note: Integrating the iOS SDK requires CocoaPods. If you want to integrate manually, follow these steps.
@@ -58,3 +50,18 @@ Step:
           [AppCenterReactNative register];
           [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
           [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+
+5. Install libary `react-native-code-push`
+  - Run script `npm install react-native-code-push` or `yarn add react-native-code-push`
+  - Run script `npm pod` or `yarn pod`
+
+6. Login account CodePush
+  - Run script `appcenter login`
+
+7. Only config app Android
+
+Link: `https://github.com/microsoft/react-native-code-push/blob/master/docs/setup-android.md`
+
+8. Only config app iOS
+
+Link: `https://github.com/microsoft/react-native-code-push/blob/master/docs/setup-ios.md`
