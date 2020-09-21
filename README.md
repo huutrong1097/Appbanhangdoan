@@ -68,44 +68,46 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
 
 9. Wrap root component with CodePush
 
-    class GorillaDesk extends Component {
-      UNSAFE_componentWillMount() {
-        // Orientation.unlockAllOrientations();
+      class GorillaDesk extends Component {
+        UNSAFE_componentWillMount() {
+          // Orientation.unlockAllOrientations();
+        }
+        componentDidMount() {
+          /** Update is downloaded silently, and applied on restart (recommended) */
+          codePush.sync(
+            {
+              updateDialog: null,
+              installMode: codePush.InstallMode.IMMEDIATE,
+              deploymentKey: Platform.OS === 'ios' ? CODEPUSH_KEY_IOS : CODEPUSH_KEY_ANDROID
+            },
+          );
+        }
+        componentWillMount() {
+          // Ensure that any codePush updates which are
+          // synchronized in the background can't trigger
+          // a restart while this component is mounted.
+          codePush.disallowRestart();
+        }
+        componentWillUnmount() {
+          // Reallow restarts, and optionally trigger
+          // a restart if one was currently pending.
+          codePush.allowRestart();
+        }
+        render() {
+          return (
+            <Provider store={store} >
+              <App />
+            </Provider>
+          );
+        }
       }
-      componentDidMount() {
-        /** Update is downloaded silently, and applied on restart (recommended) */
-        codePush.sync(
-          {
-            updateDialog: null,
-            installMode: codePush.InstallMode.IMMEDIATE,
-            deploymentKey: Platform.OS === 'ios' ? CODEPUSH_KEY_IOS : CODEPUSH_KEY_ANDROID
-          },
-        );
-      }
-      componentWillMount() {
-        // Ensure that any codePush updates which are
-        // synchronized in the background can't trigger
-        // a restart while this component is mounted.
-        codePush.disallowRestart();
-      }
-      componentWillUnmount() {
-        // Reallow restarts, and optionally trigger
-        // a restart if one was currently pending.
-        codePush.allowRestart();
-      }
-      render() {
-        return (
-          <Provider store={store} >
-            <App />
-          </Provider>
-        );
-      }
-    }
-    const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
-    export default codePush(codePushOptions)(GorillaDesk);
+      const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
+      export default codePush(codePushOptions)(GorillaDesk);
 
-**Deployment and release CodePush**:
-**Note**:
+**Deployment and release CodePush:**
+
+**Note:**
+
 Before you can begin releasing app updates, you must sign-in with your existing CodePush account or create a new App Center account. You can do this by running the following command once you've installed the CLI: `appcenter login`
 
 **Deployment script structure**
@@ -145,14 +147,14 @@ Before you can begin releasing app updates, you must sign-in with your existing 
 **Example**
 
   - Build Production iOS
-  
-  `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Production`
+
+  `appcenter codepush release-react -a <ownerName>/<appName> -d Production -m`
   - Build Staging iOS
 
-  `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Staging`
+  `appcenter codepush release-react -a <ownerName>/<appName> -d Staging -m`
   - Give production updates only to 20 percent of your users
 
-  `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Production -r 20`
+  `appcenter codepush release-react -a <ownerName>/<appName> -d <deploymentName> -r 20`
   - Provide a Staging build for Production
 
   `appcenter codepush promote -a <ownerName>/<appName> -s Staging -d Production`
@@ -167,7 +169,7 @@ Before you can begin releasing app updates, you must sign-in with your existing 
   `appcenter apps list`
   - The command get the deploy key
 
-  `appcenter codepush deployment list -a nhan.phan-namlongsoft.net/Gorilla-Desk-Android -k`
+  `appcenter codepush deployment list -a <ownerName>/<appName> -k`
   - The command gets a list of deployment status
 
   `appcenter codepush deployment list -a <ownerName>/<appName>`
