@@ -145,25 +145,36 @@ Before you can begin releasing app updates, you must sign-in with your existing 
 **Example**
 
   - Build Production iOS
+  
   `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Production`
   - Build Staging iOS
+
   `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Staging`
   - Give production updates only to 20 percent of your users
+
   `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Production -r 20`
   - Provide a Staging build for Production
+
   `appcenter codepush promote -a <ownerName>/<appName> -s Staging -d Production`
   - Provide a Staging build for Production only 20 percent of your users
+
   `appcenter codepush promote -a <ownerName>/<appName> -s Staging -d Production -r 20`
   - The command update rollout the previous version. Then, after waiting for a reasonable amount of time to see if there are any crash reports or customer feedback, you can extend it to your entire audience by running
+
   `appcenter codepush patch -a <ownerName>/<appName> <deploymentName> -r 100`
   - The command gets a list of project name
+
   `appcenter apps list`
   - The command get the deploy key
+
   `appcenter codepush deployment list -a nhan.phan-namlongsoft.net/Gorilla-Desk-Android -k`
   - The command gets a list of deployment status
+
   `appcenter codepush deployment list -a <ownerName>/<appName>`
   - See release history
+
   `appcenter codepush deployment history -a <ownerName>/<appName> <deploymentName>`
   - Clearing Release History
+
   `appcenter codepush deployment clear -a <ownerName>/<appName> <deploymentName>`
 
