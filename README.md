@@ -68,7 +68,7 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
 
 9. Wrap root component with CodePush
 
-      class GorillaDesk extends Component {
+      `class GorillaDesk extends Component {
         UNSAFE_componentWillMount() {
           // Orientation.unlockAllOrientations();
         }
@@ -102,7 +102,7 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
         }
       }
       const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
-      export default codePush(codePushOptions)(GorillaDesk);
+      export default codePush(codePushOptions)(GorillaDesk);`
 
 **Deployment and release CodePush:**
 
