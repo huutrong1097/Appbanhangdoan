@@ -82,22 +82,18 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
           },
         );
       }
-
       componentWillMount() {
         // Ensure that any codePush updates which are
         // synchronized in the background can't trigger
         // a restart while this component is mounted.
         codePush.disallowRestart();
       }
-
       componentWillUnmount() {
         // Reallow restarts, and optionally trigger
         // a restart if one was currently pending.
         codePush.allowRestart();
       }
-
       render() {
-
         return (
           <Provider store={store} >
             <App />
@@ -105,9 +101,6 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
         );
       }
     }
-
     const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
-
     export default codePush(codePushOptions)(GorillaDesk);
-
 
