@@ -2,12 +2,14 @@
 ![](https://drive.google.com/file/d/1moLDeCQB-mIYqlOkeE6G3V4JBarD3FOl/view?usp=sharing)
 
 **Steps to add CodePush:**
+
 **#install lib**:
 
 1. npm install --save react-native-code-push
 2. yarn pod or npm pod
 
 **#Create project code push for app**:
+
 Step:
 
 1. Access link: https://appcenter.ms/
