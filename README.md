@@ -1,4 +1,4 @@
-# Add CodePush: 
+**Add CodePush:**
 
 **Add SDK CodePush**:
 
@@ -68,41 +68,38 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
 
 9. Wrap root component with CodePush
 
-      `class GorillaDesk extends Component {
-        UNSAFE_componentWillMount() {
-          // Orientation.unlockAllOrientations();
-        }
-        componentDidMount() {
-          /** Update is downloaded silently, and applied on restart (recommended) */
-          codePush.sync(
-            {
-              updateDialog: null,
-              installMode: codePush.InstallMode.IMMEDIATE,
-              deploymentKey: Platform.OS === 'ios' ? CODEPUSH_KEY_IOS : CODEPUSH_KEY_ANDROID
-            },
-          );
-        }
-        componentWillMount() {
-          // Ensure that any codePush updates which are
-          // synchronized in the background can't trigger
-          // a restart while this component is mounted.
-          codePush.disallowRestart();
-        }
-        componentWillUnmount() {
-          // Reallow restarts, and optionally trigger
-          // a restart if one was currently pending.
-          codePush.allowRestart();
-        }
-        render() {
-          return (
-            <Provider store={store} >
-              <App />
-            </Provider>
-          );
-        }
+    class GorillaDesk extends Component {
+      componentDidMount() {
+        /** Update is downloaded silently, and applied on restart (recommended) */
+        codePush.sync(
+          {
+            updateDialog: null,
+            installMode: codePush.InstallMode.IMMEDIATE,
+            deploymentKey: Platform.OS === 'ios' ? CODEPUSH_KEY_IOS : CODEPUSH_KEY_ANDROID
+          },
+        );
       }
-      const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
-      export default codePush(codePushOptions)(GorillaDesk);`
+      componentWillMount() {
+        // Ensure that any codePush updates which are
+        // synchronized in the background can't trigger
+        // a restart while this component is mounted.
+        codePush.disallowRestart();
+      }
+      componentWillUnmount() {
+        // Reallow restarts, and optionally trigger
+        // a restart if one was currently pending.
+        codePush.allowRestart();
+      }
+      render() {
+        return (
+          <Provider store={store} >
+            <App />
+          </Provider>
+        );
+      }
+    }
+    const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
+    export default codePush(codePushOptions)(GorillaDesk);
 
 **Deployment and release CodePush:**
 
@@ -176,6 +173,9 @@ Before you can begin releasing app updates, you must sign-in with your existing 
   - See release history
 
   `appcenter codepush deployment history -a <ownerName>/<appName> <deploymentName>`
+  - The deployment previous version recovery command
+
+  `appcenter codepush rollback <ownerName>/<appName> <deploymentName> --target-release <label release>`
   - Clearing Release History
 
   `appcenter codepush deployment clear -a <ownerName>/<appName> <deploymentName>`
