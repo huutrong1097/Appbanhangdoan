@@ -1,6 +1,6 @@
 9. Wrap root component with CodePush
 
-      class GorillaDesk extends Component {
+      `class GorillaDesk extends Component {
       UNSAFE_componentWillMount() {
       // Orientation.unlockAllOrientations();
       }
@@ -34,6 +34,5 @@
       }
       }
       const codePushOptions = { checkFrequency: codePush.CheckFrequency.MANUAL };
-      export default codePush(codePushOptions)(GorillaDesk);
-
+      export default codePush(codePushOptions)(GorillaDesk);`
 
