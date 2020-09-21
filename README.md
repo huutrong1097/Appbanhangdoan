@@ -4,7 +4,7 @@
 
 Step:
 
-1. Sign up account in CodePush: `https://appcenter.ms`
+1. Sign up account in CodePush: https://appcenter.ms
 2. Create project for Android/iOS
 3. Config Android:
   - Add the SDK to the project:
@@ -60,8 +60,9 @@ Step:
 
 7. Only config app Android
 
-Link: `https://github.com/microsoft/react-native-code-push/blob/master/docs/setup-android.md`
+Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup-android.md
 
 8. Only config app iOS
 
-Link: `https://github.com/microsoft/react-native-code-push/blob/master/docs/setup-ios.md`
+Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup-ios.md
+
