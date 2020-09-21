@@ -1,6 +1,6 @@
-**Steps to add CodePush:**
+# Add CodePush: 
 
-**#Add SDK CodePush**:
+**Add SDK CodePush**:
 
 Step:
 
@@ -105,10 +105,10 @@ Link: https://github.com/microsoft/react-native-code-push/blob/master/docs/setup
     export default codePush(codePushOptions)(GorillaDesk);
 
 **Deployment and release CodePush**:
-# Note: 
+**Note**:
 Before you can begin releasing app updates, you must sign-in with your existing CodePush account or create a new App Center account. You can do this by running the following command once you've installed the CLI: `appcenter login`
 
-# Deployment script structure
+**Deployment script structure**
 
     appcenter codepush release-react -a <ownerName>/<appName> -d <deploymentName> -t <targetBinaryVersion>
     [-t|--target-binary-version <targetBinaryVersion>]
@@ -132,7 +132,7 @@ Before you can begin releasing app updates, you must sign-in with your existing 
     [--disable-telemetry]
     [-v|--version]
 
-# Patch metadata update
+**Patch metadata update**
 
     appcenter codepush patch -a <ownerName>/<appName> <deploymentName> <existing-release-label>
     [-r|--rollout <rolloutPercentage>]
@@ -142,7 +142,7 @@ Before you can begin releasing app updates, you must sign-in with your existing 
     [--disable-telemetry]
     [-v|--version]
 
-# Example: 
+**Example**
 
   - Build Production iOS
   `appcenter codepush release-react -a nhan.phan-namlongsoft.net/Gorilla-Desk-iOS -d Production`
@@ -167,4 +167,3 @@ Before you can begin releasing app updates, you must sign-in with your existing 
   - Clearing Release History
   `appcenter codepush deployment clear -a <ownerName>/<appName> <deploymentName>`
 
-  
